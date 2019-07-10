@@ -11,7 +11,7 @@ from argparse_color_formatter import ColorHelpFormatter
 from colorama import init, Fore
 
 import _init_paths  # pylint: disable=unused-import
-from core.config import cfg
+from panet.core.config import cfg
 
 
 def parse_args():

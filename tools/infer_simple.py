@@ -146,7 +146,7 @@ def main():
 
         timers = defaultdict(Timer)
 
-        cls_boxes, cls_segms, cls_keyps = im_detect_all(maskRCNN, im, timers=timers)
+        cls_boxes, cls_segms, cls_keyps, cls_segms_raw = im_detect_all(maskRCNN, im, timers=timers)
 
         im_name, _ = os.path.splitext(os.path.basename(imglist[i]))
         vis_utils.vis_one_image(

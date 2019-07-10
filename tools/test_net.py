@@ -42,7 +42,7 @@ def parse_args():
     parser.add_argument(
         '--set', dest='set_cfgs',
         help='set config keys, will overwrite config in the cfg_file.'
-             ' See lib/core/config.py for all options',
+             ' See panet/core/config.py for all options',
         default=[], nargs='*')
 
     parser.add_argument(
@@ -90,6 +90,19 @@ if __name__ == '__main__':
     if args.dataset == "coco2017":
         cfg.TEST.DATASETS = ('coco_2017_val',)
         cfg.MODEL.NUM_CLASSES = 81
+
+    elif args.dataset == "siim_split_stage1":
+        cfg.TEST.DATASETS = ('siim_val-split_stage1',)
+        cfg.MODEL.NUM_CLASSES = 2
+
+    elif args.dataset == "siim_dbg":
+        cfg.TEST.DATASETS = ('siim_val-split_stage1-dbg',)
+        cfg.MODEL.NUM_CLASSES = 2
+
+    elif args.dataset == "siim_test-stg1":
+        cfg.TEST.DATASETS = ('siim_test-stg1',)
+        cfg.MODEL.NUM_CLASSES = 2
+
     elif args.dataset == "keypoints_coco2017":
         cfg.TEST.DATASETS = ('keypoints_coco_2017_val',)
         cfg.MODEL.NUM_CLASSES = 2
@@ -105,8 +118,10 @@ if __name__ == '__main__':
     # manually set args.cuda
     args.cuda = True
 
-    run_inference(
+    results = run_inference(
         args,
         ind_range=args.range,
         multi_gpu_testing=args.multi_gpu_testing,
         check_expected_results=True)
+
+    # print(results)

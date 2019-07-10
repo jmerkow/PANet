@@ -18,17 +18,17 @@ import cv2
 cv2.setNumThreads(0)  # pytorch issue 1355: possible deadlock in dataloader
 
 import _init_paths  # pylint: disable=unused-import
-import nn as mynn
-import utils.net as net_utils
-import utils.misc as misc_utils
-from core.config import cfg, cfg_from_file, cfg_from_list, assert_and_infer_cfg
-from datasets.roidb import combined_roidb_for_training
-from roi_data.loader import RoiDataLoader, MinibatchSampler, BatchSampler, collate_minibatch
-from modeling.model_builder import Generalized_RCNN
-from utils.detectron_weight_helper import load_detectron_weight
-from utils.logging import setup_logging
-from utils.timer import Timer
-from utils.training_stats import TrainingStats
+import panet.nn as mynn
+import panet.utils.net as net_utils
+import panet.utils.misc as misc_utils
+from panet.core.config import cfg, cfg_from_file, cfg_from_list, assert_and_infer_cfg
+from panet.datasets.roidb import combined_roidb_for_training
+from panet.roi_data.loader import RoiDataLoader, MinibatchSampler, BatchSampler, collate_minibatch
+from panet.modeling.model_builder import Generalized_RCNN
+from panet.utils.detectron_weight_helper import load_detectron_weight
+from panet.utils.logging import setup_logging
+from panet.utils.timer import Timer
+from panet.utils.training_stats import TrainingStats
 
 # Set up logging and load config options
 logger = setup_logging(__name__)
@@ -155,6 +155,10 @@ def main():
         cfg.MODEL.NUM_CLASSES = 81
     elif args.dataset == "keypoints_coco2017":
         cfg.TRAIN.DATASETS = ('keypoints_coco_2017_train',)
+        cfg.MODEL.NUM_CLASSES = 2
+
+    elif args.dataset == "siim_split_stage1":
+        cfg.TRAIN.DATASETS = ('siim_train-split_stage1',)
         cfg.MODEL.NUM_CLASSES = 2
     else:
         raise ValueError("Unexpected args.dataset: {}".format(args.dataset))
@@ -360,6 +364,7 @@ def main():
     maskRCNN.train()
 
     CHECKPOINT_PERIOD = int(cfg.TRAIN.SNAPSHOT_ITERS / cfg.NUM_GPUS)
+    logger.info('CHECKPOINT_PERIOD %d', CHECKPOINT_PERIOD)
 
     # Set index for decay steps
     decay_steps_ind = None

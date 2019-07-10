@@ -1,7 +1,7 @@
-"""Add {PROJECT_ROOT}/lib. to PYTHONPATH
+"""Add {PROJECT_ROOT}/panet. to PYTHONPATH
 
 Usage:
-import this module before import any modules under lib/
+import this module before import any modules under panet/
 e.g 
     import _init_paths
     from core.config import cfg
@@ -17,6 +17,6 @@ def add_path(path):
 
 this_dir = osp.abspath(osp.dirname(osp.dirname(__file__)))
 
-# Add lib to PYTHONPATH
-lib_path = osp.join(this_dir, 'lib')
+# Add panet to PYTHONPATH
+lib_path = osp.join(this_dir)
 add_path(lib_path)
