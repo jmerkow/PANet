@@ -42,9 +42,9 @@ import pprint
 
 from panet.core.config import cfg
 from panet.utils.logging import send_email
-import datasets.cityscapes_json_dataset_evaluator as cs_json_dataset_evaluator
-import datasets.json_dataset_evaluator as json_dataset_evaluator
-import datasets.voc_dataset_evaluator as voc_dataset_evaluator
+import panet.datasets.cityscapes_json_dataset_evaluator as cs_json_dataset_evaluator
+import panet.datasets.json_dataset_evaluator as json_dataset_evaluator
+import panet.datasets.voc_dataset_evaluator as voc_dataset_evaluator
 
 logger = logging.getLogger(__name__)
 

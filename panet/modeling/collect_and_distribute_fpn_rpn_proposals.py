@@ -58,9 +58,9 @@ class CollectAndDistributeFpnRpnProposalsOp(nn.Module):
             json_dataset.add_proposals(roidb, rois, im_scales, crowd_thresh=0)
             # Compute training labels for the RPN proposals; also handles
             # distributing the proposals over FPN levels
-            output_blob_names = roi_data.fast_rcnn.get_fast_rcnn_blob_names()
+            output_blob_names = panet.roi_data.fast_rcnn.get_fast_rcnn_blob_names()
             blobs = {k: [] for k in output_blob_names}
-            roi_data.fast_rcnn.add_fast_rcnn_blobs(blobs, im_scales, roidb)
+            panet.roi_data.fast_rcnn.add_fast_rcnn_blobs(blobs, im_scales, roidb)
         else:
             # For inference we have a special code path that avoids some data
             # loader overhead
@@ -100,7 +100,7 @@ def distribute(rois, label_blobs):
     # rois = np.delete(rois, idx_neg, axis=0)
     # lvls = np.delete(lvls, idx_neg, axis=0)
 
-    output_blob_names = roi_data.fast_rcnn.get_fast_rcnn_blob_names(is_training=False)
+    output_blob_names = panet.roi_data.fast_rcnn.get_fast_rcnn_blob_names(is_training=False)
     outputs = [None] * len(output_blob_names)
     outputs[0] = rois
 

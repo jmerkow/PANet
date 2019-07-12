@@ -9,7 +9,7 @@ from torch.utils.data.dataloader import default_collate
 from torch._six import int_classes as _int_classes
 
 from panet.core.config import cfg
-from roi_data.minibatch import get_minibatch
+from panet.roi_data.minibatch import get_minibatch
 import panet.utils.blob as blob_utils
 # from panet.model.rpn.bbox_transform import bbox_transform_inv, clip_boxes
 

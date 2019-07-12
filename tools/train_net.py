@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """ Training Script """
 
 import argparse

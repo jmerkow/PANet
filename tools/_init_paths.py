@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """Add {PROJECT_ROOT}/panet. to PYTHONPATH
 
 Usage:

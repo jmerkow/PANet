@@ -121,7 +121,7 @@ def add_fast_rcnn_blobs(blobs, im_scales, roidb):
     # all minibatch images
     valid = True
     if cfg.MODEL.KEYPOINTS_ON:
-        valid = roi_data.keypoint_rcnn.finalize_keypoint_minibatch(blobs, valid)
+        valid = panet.roi_data.keypoint_rcnn.finalize_keypoint_minibatch(blobs, valid)
 
     return valid
 
@@ -192,12 +192,12 @@ def _sample_rois(roidb, im_scale, batch_idx):
 
     # Optionally add Mask R-CNN blobs
     if cfg.MODEL.MASK_ON:
-        roi_data.mask_rcnn.add_mask_rcnn_blobs(blob_dict, sampled_boxes, roidb,
+        panet.roi_data.mask_rcnn.add_mask_rcnn_blobs(blob_dict, sampled_boxes, roidb,
                                                im_scale, batch_idx)
 
     # Optionally add Keypoint R-CNN blobs
     if cfg.MODEL.KEYPOINTS_ON:
-        roi_data.keypoint_rcnn.add_keypoint_rcnn_blobs(
+        panet.roi_data.keypoint_rcnn.add_keypoint_rcnn_blobs(
             blob_dict, roidb, fg_rois_per_image, fg_inds, im_scale, batch_idx)
 
     return blob_dict

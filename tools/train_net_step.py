@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """ Training script for steps_with_decay policy"""
 
 import argparse
@@ -159,6 +160,10 @@ def main():
 
     elif args.dataset == "siim_split_stage1":
         cfg.TRAIN.DATASETS = ('siim_train-split_stage1',)
+        cfg.MODEL.NUM_CLASSES = 2
+
+    elif args.dataset == "siim_dbg":
+        cfg.TRAIN.DATASETS = ('siim_train-split_stage1-dbg',)
         cfg.MODEL.NUM_CLASSES = 2
     else:
         raise ValueError("Unexpected args.dataset: {}".format(args.dataset))

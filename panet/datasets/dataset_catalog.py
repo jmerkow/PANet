@@ -225,6 +225,13 @@ DATASETS = {
             _DATA_DIR + '/siim-kaggle/coco_annotations/train-stg1-split.json',
     },
 
+    'siim_train-split_stage1-dbg': {
+        IM_DIR:
+            _DATA_DIR + '/siim-kaggle/jpg-images-train-stage1/',
+        ANN_FN:
+            _DATA_DIR + '/siim-kaggle/coco_annotations/dbg-train.json',
+    },
+
     'siim_val-split_stage1': {
         IM_DIR:
             _DATA_DIR + '/siim-kaggle/jpg-images-train-stage1/',

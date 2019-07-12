@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Perform inference on one or more datasets."""
 
 import argparse
@@ -10,9 +11,9 @@ import time
 import torch
 
 import _init_paths  # pylint: disable=unused-import
-from core.config import cfg, merge_cfg_from_file, merge_cfg_from_list, assert_and_infer_cfg
-from core.test_engine import run_inference
-import utils.logging
+from panet.core.config import cfg, merge_cfg_from_file, merge_cfg_from_list, assert_and_infer_cfg
+from panet.core.test_engine import run_inference
+import panet.utils.logging
 
 # OpenCL may be enabled by default in OpenCV3; disable it because it's not
 # thread safe and causes unwanted GPU memory allocations.
@@ -63,7 +64,7 @@ if __name__ == '__main__':
     if not torch.cuda.is_available():
         sys.exit("Need a CUDA device to run the code.")
 
-    logger = utils.logging.setup_logging(__name__)
+    logger = panet.utils.logging.setup_logging(__name__)
     args = parse_args()
     logger.info('Called with args:')
     logger.info(args)

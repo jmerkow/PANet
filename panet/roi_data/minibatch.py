@@ -3,7 +3,8 @@ import cv2
 
 from panet.core.config import cfg
 import panet.utils.blob as blob_utils
-import panet.roi_data.rpn
+from panet.roi_data import rpn
+from panet.roi_data import fast_rcnn
 
 
 def get_minibatch_blob_names(is_training=True):
@@ -13,12 +14,12 @@ def get_minibatch_blob_names(is_training=True):
     blob_names = ['data']
     if cfg.RPN.RPN_ON:
         # RPN-only or end-to-end Faster R-CNN
-        blob_names += roi_data.rpn.get_rpn_blob_names(is_training=is_training)
+        blob_names += rpn.get_rpn_blob_names(is_training=is_training)
     elif cfg.RETINANET.RETINANET_ON:
         raise NotImplementedError
     else:
         # Fast R-CNN like models trained on precomputed proposals
-        blob_names += roi_data.fast_rcnn.get_fast_rcnn_blob_names(
+        blob_names += fast_rcnn.get_fast_rcnn_blob_names(
             is_training=is_training
         )
     return blob_names
@@ -35,12 +36,12 @@ def get_minibatch(roidb):
     blobs['data'] = im_blob
     if cfg.RPN.RPN_ON:
         # RPN-only or end-to-end Faster/Mask R-CNN
-        valid = roi_data.rpn.add_rpn_blobs(blobs, im_scales, roidb)
+        valid = rpn.add_rpn_blobs(blobs, im_scales, roidb)
     elif cfg.RETINANET.RETINANET_ON:
         raise NotImplementedError
     else:
         # Fast R-CNN like models trained on precomputed proposals
-        valid = roi_data.fast_rcnn.add_fast_rcnn_blobs(blobs, im_scales, roidb)
+        valid = fast_rcnn.add_fast_rcnn_blobs(blobs, im_scales, roidb)
     return blobs, valid
 
 

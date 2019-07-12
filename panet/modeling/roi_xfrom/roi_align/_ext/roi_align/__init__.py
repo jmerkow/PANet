@@ -2,7 +2,7 @@
 from torch.utils.ffi import _wrap_function
 from ._roi_align import lib as _lib, ffi as _ffi
 
-__all__ = []
+__all__ = ['roi_align_forward_cuda', 'roi_align_backward_cuda']
 def _import_symbols(locals):
     for symbol in dir(_lib):
         fn = getattr(_lib, symbol)

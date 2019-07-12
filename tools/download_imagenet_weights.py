@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Script to downlaod ImageNet pretrained weights from Google Drive
 
 Extra packages required to run the script:

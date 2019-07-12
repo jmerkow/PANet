@@ -3,8 +3,6 @@
 import torch
 import torch.nn as nn
 
-import panet.nn.functional as myF
-
 
 class GroupNorm(nn.Module):
     def __init__(self, num_groups, num_channels, eps=1e-5, affine=True):
@@ -27,6 +25,7 @@ class GroupNorm(nn.Module):
             self.bias.data.zero_()
 
     def forward(self, x):
+        import panet.nn.functional as myF
         return myF.group_norm(
             x, self.num_groups, self.weight, self.bias, self.eps
         )
