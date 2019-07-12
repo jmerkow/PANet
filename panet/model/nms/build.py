@@ -8,9 +8,9 @@ from torch.utils.ffi import create_extension
 sources = []
 headers = []
 defines = []
-with_cuda = False
+with_cuda = True
 
-if torch.cuda.is_available():
+if torch.cuda.is_available() or with_cuda:
     print('Including CUDA code.')
     sources += ['src/nms_cuda.c']
     headers += ['src/nms_cuda.h']

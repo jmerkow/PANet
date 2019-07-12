@@ -8,9 +8,9 @@ from torch.utils.ffi import create_extension
 sources = []
 headers = []
 defines = []
-with_cuda = False
+with_cuda = True
 
-if torch.cuda.is_available():
+if torch.cuda.is_available() or with_cuda:
     print('Including CUDA code.')
     sources += ['src/roi_align_cuda.c']
     headers += ['src/roi_align_cuda.h']

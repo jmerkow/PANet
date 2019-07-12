@@ -7,9 +7,9 @@ from torch.utils.ffi import create_extension
 sources = ['src/roi_pooling.c']
 headers = ['src/roi_pooling.h']
 defines = []
-with_cuda = False
+with_cuda = True
 
-if torch.cuda.is_available():
+if torch.cuda.is_available() or with_cuda:
     print('Including CUDA code.')
     sources += ['src/roi_pooling_cuda.c']
     headers += ['src/roi_pooling_cuda.h']
